@@ -10,7 +10,7 @@
 
 🌐 **Interactive website version of this page:** [`docs/index.html`](docs/index.html) — publish it in one click via Settings → Pages → Deploy from a branch → `main` → `/docs` (see §10).
 
-![Benchmark dashboard](results/dashboard.png)
+![Benchmark dashboard](docs/dashboard.png)
 
 ![Demo animation](docs/demo.gif)
 
@@ -61,7 +61,7 @@ TypeSafe AI launched Jev in September 2026. You call their API, they return the 
 **6. This repo is a lie detector, not a leaderboard.**
 Anyone can screenshot a table. Here every number is produced by code you can run: public datasets, live market/news states fetched at runtime, calibration metrics with confidence intervals, and a claims file where each row cites its primary source — including rows marked **UNVERIFIED** when no source exists. Run it, read `results/`, and you have evidence instead of opinions.
 
-![How it works](results/architecture.png)
+![How it works](docs/architecture.png)
 
 ---
 
@@ -192,7 +192,7 @@ Note the honest reversal: the encoder wins on Brier but loses on ECE — which i
 - **H5 — Calibration rankings reverse after accuracy control.** Stronger models look "better calibrated" just by being right more often. Report jointly-correct views alongside raw ECE/Brier.
 - **H6 — Local is deterministic; hosted jitters.** Proxies: byte-identical across 3 repeats. Hosted: labels stable, probabilities drift ±0.01–0.04. Design gates and caches accordingly.
 
-Figures: `results/dashboard.png`, `results/hidden.png` (reliability diagram), `results/architecture.png`.
+Figures: `docs/dashboard.png`, `docs/architecture.png` (committed copies) and `results/hidden.png` (generated locally; `results/` is ignored by git).
 
 ---
 
