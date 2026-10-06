@@ -8,7 +8,7 @@
 
 > **CEO summary.** System-One models answer typed business questions — *which queue, how urgent, yes or no* — with calibrated probabilities, in one fast pass instead of generating text. TypeSafe's Jev defined the category in September 2026; this repo proves, with runnable code and real numbers, which open alternatives (Laya, Clef, Kev, SemIf-family) actually exist, where each wins and loses, and which viral claims are unverified. Everything runs on CPU in ~2 minutes with no API keys, including checks against live market and news data. If you route tickets, gate agent actions, or buy/build decision infrastructure, this repo tells you what to use and how to prove it on your own data.
 
-🌐 **Interactive website version of this page:** [`docs/index.html`](docs/index.html) — publish it in one click via Settings → Pages → Deploy from a branch → `main` → `/docs` (see §10).
+🌐 **Interactive website version of this page:** [`docs/index.html`](docs/index.html) (also at [`docs/preview.html`](docs/preview.html) and root [`preview.html`](preview.html)) — live at `https://m0-ar.github.io/jev-systemone-open-benchmark-2026/` once Pages is enabled (Settings → Pages → Deploy from a branch → `main` → `/docs`, see §10).
 
 ![Benchmark dashboard](docs/dashboard.png)
 
@@ -86,7 +86,7 @@ Anyone can screenshot a table. Here every number is produced by code you can run
 - **Live-data verification** — every run fetches real ECB FX, crypto, weather, and front-page news states and routes them through the System-One format.
 - **Hidden-pattern analyses** — H1–H6 with figures (`dashboard.png`, `hidden.png`, `architecture.png`).
 - **Animated demo** — `docs/demo.mp4` + `docs/demo.gif`, regenerated from your results by `experiments/05_media.py`.
-- **GitHub Pages website** — `docs/index.html`, self-contained (no CDN, works from `file://`), one-click deploy.
+- **GitHub Pages website** — `docs/index.html` + `docs/preview.html`, with root `index.html`/`preview.html` mirrors so it resolves under either Pages source; self-contained (no CDN, works from `file://`), one-click deploy.
 - **Paper-ready** — outline in `papers/`, citation file, figure registry in `results/`.
 
 ---
@@ -211,23 +211,43 @@ Each state is routed through the local `/v1/systemone` format (choice + noul in 
 
 ## 🌐 Website + video (GitHub Pages)
 
-The `docs/` folder **is** the website — self-contained HTML + figures + video, no build step, no CDN (works even opened as a file):
+The `docs/` folder **is** the website — self-contained HTML + figures + video, no build step, no CDN (works even opened as a file). Root mirrors make it resolve under **either** Pages source setting (`/docs` or `/`):
 
 | File | Purpose |
 |---|---|
-| `docs/index.html` | The whole repo as a website: summary, guide, tables, figures, video |
-| `docs/demo.mp4` | 8 s animated walkthrough (720p H.264, faststart for web streaming) |
-| `docs/demo.gif` | Inline fallback for the README animation above |
+| `docs/index.html` | Canonical page: the whole repo as a website |
+| `docs/preview.html` | Byte-identical canonical copy (verify: `diff docs/index.html docs/preview.html` → no output) |
+| `preview.html` (repo root) | Mirror for root-source mode; only asset paths differ (`diff docs/preview.html preview.html` → 5 lines) |
+| `index.html` (repo root) | Instant redirect to `preview.html` + fallback links, so `/` works under root-source mode |
+| `docs/demo.mp4` / `docs/demo.gif` | 8 s walkthrough (720p H.264 faststart) + inline GIF fallback |
 | `docs/dashboard.png`, `docs/architecture.png` | Hero figures, copied from `results/` |
-| `docs/.nojekyll` | Tells Pages to serve files as-is |
+| `.nojekyll` + `docs/.nojekyll` | Serve files as-is under either source |
 
 **Publish in 30 seconds:**
 
 1. Push this repo to GitHub.
 2. Open **Settings → Pages**.
 3. Under **Build and deployment → Source** select **Deploy from a branch**.
-4. Branch: `main`, folder: `/docs`, **Save**.
-5. Open `https://<your-username>.github.io/<repo-name>/` — the site from `docs/index.html` is live. Every push to `main` redeploys it.
+4. Branch: `main`, folder: `/docs`, **Save**. (Root mirrors mean `/` source also works — `/docs` is still recommended.)
+5. Wait 1–2 min for the "pages build and deployment" Actions run, then open `https://m0-ar.github.io/jev-systemone-open-benchmark-2026/` — every push to `main` redeploys it.
+
+**Diagnose in 10 seconds (no login):**
+
+```bash
+BASE="https://m0-ar.github.io/jev-systemone-open-benchmark-2026"
+for p in "" "preview.html" "docs/preview.html"; do
+  printf "%s -> " "/$p"; curl -s -o /dev/null -w "%{http_code}\n" "$BASE/$p"
+done
+```
+
+| `/` | `/preview.html` | `/docs/preview.html` | Meaning |
+|---|---|---|---|
+| 200 | 200 | 404 | source = `/docs` ✅, all good |
+| 200 | 404 | 200 | source = `/` (root); file only under `/docs` — the root mirrors above fix exactly this |
+| 404 | 404 | 404 | Pages off / still building / wrong branch — check Settings → Pages + the Actions run |
+| 200 | 404 | 404 | source = `/`, but neither entry nor file exists |
+
+Rules that bit us once: the entry file must sit at the **top level of the chosen source**; every other URL mirrors the repo path **under that source** (source `/docs` → `docs/x` serves at `/x`; source `/` → `docs/x` serves at `/docs/x`); asset paths stay **relative** (absolute `/home/…` or `/assets/…` paths break under `/<repo>/`); a green deployment only proves *something* built, never that *your path* exists.
 
 **Video:** the GIF above plays inline here; the full MP4 plays on the Pages site (`<video controls>` with faststart). Both are regenerated from your own results:
 
