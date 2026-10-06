@@ -1,0 +1,20 @@
+services:
+  benchmark:
+    build: .
+    volumes:
+      - ./results:/work/results
+      - ./data:/work/data
+    env_file:
+      - .env
+    command: python experiments/run_all.py --fast
+    mem_limit: 4g
+
+  full:
+    build: .
+    volumes:
+      - ./results:/work/results
+      - ./data:/work/data
+    env_file:
+      - .env
+    command: python experiments/run_all.py --full
+    profiles: ["full"]

@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: "System-One Decision Models in the Open: Verifying Jev and Its Open Alternatives on Public and Live Data"
+authors:
+  - family-names: "Benchmark Contributors"
+    given-names: "Open"
+license: MIT
+version: 0.1.0
+date-released: 2026-10-06
+repository-code: "https://example.invalid/jev-systemone-open-benchmark-2026"

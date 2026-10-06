@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jev, Openly Verified — System-One Decision Models on Public + Live Data</title>
+<meta name="description" content="Runnable CPU-only benchmark that verifies TypeSafe Jev and its open alternatives (Laya, Clef, Kev, SemIf) on public and live data.">
+<style>
+:root{--bg:#0b1220;--card:#111c33;--line:#243355;--txt:#e8eefc;--mut:#9fb0d0;--acc:#38bdf8;--ok:#34d399;--warn:#fbbf24;--bad:#f87171}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,Inter,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+.hero{padding:64px 0 28px;text-align:center}
+.hero h1{font-size:clamp(28px,5vw,52px);margin:0 0 12px;letter-spacing:-.5px}
+.hero h1 span{color:var(--acc)}
+.sub{color:var(--mut);max-width:820px;margin:0 auto;font-size:18px}
+.badges{margin:20px 0;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.badges span{border:1px solid var(--line);border-radius:999px;padding:4px 14px;font-size:13px;color:var(--mut);background:#0e1830}
+.btns{margin:26px 0;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{background:var(--acc);color:#04121f;font-weight:700;border-radius:10px;padding:12px 22px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:34px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.card h3{margin:0 0 8px;font-size:17px}.card p{margin:0;color:var(--mut);font-size:15px}
+h2{margin:52px 0 8px;font-size:26px}h2+p.lead{color:var(--mut);margin-top:0}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{color:var(--mut);font-weight:600}td.num{font-variant-numeric:tabular-nums}
+.ok{color:var(--ok);font-weight:700}.warn{color:var(--warn);font-weight:700}.bad{color:var(--bad);font-weight:700}
+figure{margin:22px 0}figure img,figure video{width:100%;border-radius:14px;border:1px solid var(--line);background:#000}
+figcaption{color:var(--mut);font-size:14px;margin-top:8px}
+.guide{background:#0e1830;border:1px solid var(--line);border-radius:14px;padding:22px;margin:16px 0}
+.guide h3{margin-top:0;color:var(--acc)}
+code{background:#1a2745;padding:2px 7px;border-radius:6px;font-size:14px}
+pre{background:#0e1830;border:1px solid var(--line);border-radius:12px;padding:16px;overflow:auto;font-size:14px}
+footer{margin-top:60px;color:var(--mut);font-size:14px;border-top:1px solid var(--line);padding-top:18px}
+a{color:var(--acc)}
+@media(max-width:640px){.hero{padding:40px 0 16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+<h1>Jev, <span>Openly Verified</span></h1>
+<p class="sub"><strong>CEO summary.</strong> System-One models answer typed business questions — <em>which queue, how urgent, yes or no</em> — with calibrated probabilities, in one fast pass instead of generating text. TypeSafe's Jev defined the category in September 2026; this project proves, with runnable code and real numbers, which open alternatives (Laya, Clef, Kev, SemIf-family) actually exist, where each wins and loses, and which viral claims are unverified. Everything runs on CPU in ~2 minutes with no API keys, including checks against live market and news data.</p>
+<div class="badges"><span>MIT licensed</span><span>Python 3.11</span><span>Docker ready</span><span>No GPU needed</span><span>No API keys needed</span></div>
+<div class="btns">
+<a class="btn" href="#quickstart">Run it in 2 minutes</a>
+<a class="btn ghost" href="demo.mp4">▶ Watch the demo video</a>
+<a class="btn ghost" href="https://github.com/">View on GitHub</a>
+</div>
+</div>
+
+<figure><img src="dashboard.png" alt="Benchmark dashboard: accuracy, Brier score and calibration charts"><figcaption>Reference run on CPU: encoder proxy vs logit-reader across tickets and news topics, plus calibration before/after temperature scaling.</figcaption></figure>
+
+<h2>Start here — the 6 ideas that make you professional</h2>
+<p class="lead">No background needed. Each paragraph is one idea; together they are most of what interviews test.</p>
+<div class="guide"><h3>1 · Normal AI writes sentences; System-One AI answers questions</h3><p>You hand it a situation (a ticket, a price, a log line) plus a fixed question; it hands back a <strong>typed answer with a probability</strong> like <code>{queue: "billing", confidence: 0.97}</code>. No paragraphs to parse, nothing to hallucinate into your database.</p></div>
+<div class="guide"><h3>2 · Only three question shapes exist</h3><p><code>choice</code> picks one of up to 255 options. <code>score</code> places the input on an ordered scale you define. <code>noul</code> is the probability a yes/no statement is true. All questions about one situation are answered <strong>in parallel, in one request</strong>.</p></div>
+<div class="guide"><h3>3 · The probability is the product</h3><p>Your code acts when confident and asks a human when not: auto-refund at <code>billing ≥ 0.95</code>, review otherwise. The skill is choosing thresholds on <strong>your</strong> labeled data — this repo shows exactly how.</p></div>
+<div class="guide"><h3>4 · Jev is the original; it is closed and hosted</h3><p>TypeSafe AI, September 2026: ~70–500 ms per call, $0.042 per million input tokens, 64k-token requests. You cannot download, run offline, or fine-tune it.</p></div>
+<div class="guide"><h3>5 · Open alternatives rebuild the same trick three ways</h3><p><strong>Laya</strong> trains a small encoder (ModernBERT, 421M) — fast and fully local. <strong>Kev</strong> and <strong>Clef</strong> freeze a big open model (Qwen) and add a small scoring head — more accurate, needs a GPU. <strong>SemIf/OpenJev-style</strong> projects read scores straight out of an existing model.</p></div>
+<div class="guide"><h3>6 · This repo is a lie detector, not a leaderboard</h3><p>Every number is produced by code you can run — public datasets, live states, confidence intervals, and a claims file where rows can say <strong>UNVERIFIED</strong>. Evidence instead of opinions.</p></div>
+
+<figure><img src="architecture.png" alt="System-One flow diagram: state to encoder to choice, score and noul heads to probabilities"><figcaption>One state in, typed probabilities out. Your code branches on thresholds — the model never generates text.</figcaption></figure>
+
+<h2>Watch it run</h2>
+<figure><video controls preload="metadata" poster="dashboard.png" src="demo.mp4"><img src="demo.gif" alt="Demo animation"></video><figcaption>8-second animated walkthrough, regenerated from your own results by <code>experiments/05_media.py</code>. GIF fallback: <a href="demo.gif">demo.gif</a>.</figcaption></figure>
+
+<h2>What was verified</h2>
+<table>
+<tr><th>Claim</th><th>Verdict</th></tr>
+<tr><td>Jev: choice/score/noul, parallel, RLCD, 70–500 ms, $0.042/M, 64k</td><td class="ok">VERIFIED</td></tr>
+<tr><td>Laya 421M ModernBERT, Apache-2.0, ~33 ms</td><td class="ok">VERIFIED*</td></tr>
+<tr><td>Clef 27B + Clef-flash 9B, Apache-2.0, vision, 64k, Oct 2026</td><td class="ok">VERIFIED</td></tr>
+<tr><td>Kev 0.8/4/9/27B, Qwen + LoRA-r16 + pointer head</td><td class="ok">VERIFIED</td></tr>
+<tr><td>SemIf / OpenJev / jevlike / NanoJev family</td><td class="ok">VERIFIED</td></tr>
+<tr><td>"Coin base + B-loss"</td><td class="bad">CORRECTED — hallucination</td></tr>
+<tr><td>WaterSheep / CLM-8B 9× / Deem / Tev scores</td><td class="warn">UNVERIFIED</td></tr>
+<tr><td>Imajev-4B viral "95%"</td><td class="warn">PARTIAL — real JevBench entrant; figure unverified</td></tr>
+<tr><td>"Native Groq/Cerebras 27B"</td><td class="warn">PARTIAL — deployment property</td></tr>
+</table>
+<p>* Laya base ≈ chance zero-shot; fine-tuned 0.766 vs Jev 0.727 on typed-decisions; 77-label collapse documented by its vendor.</p>
+
+<h2>Results (reference CPU run)</h2>
+<table>
+<tr><th>Task</th><th>Encoder-proxy</th><th>Logit-reader</th></tr>
+<tr><td>Tickets accuracy (20 test)</td><td class="num">1.00 [1.00, 1.00]</td><td class="num">1.00 [1.00, 1.00]</td></tr>
+<tr><td>Tickets Brier ↓</td><td class="num"><strong>0.014</strong></td><td class="num">0.204</td></tr>
+<tr><td>Tickets ECE-15 ↓</td><td class="num"><strong>0.086</strong></td><td class="num">0.364</td></tr>
+<tr><td>News accuracy (60 test)</td><td class="num"><strong>0.60</strong></td><td class="num">0.43</td></tr>
+<tr><td>News Brier ↓</td><td class="num"><strong>0.634</strong></td><td class="num">0.716</td></tr>
+<tr><td>News ECE-15 ↓</td><td class="num">0.255</td><td class="num"><strong>0.148</strong></td></tr>
+</table>
+<p>Honest reversal included: the encoder wins Brier but loses ECE on news — which is why this project reports both, plus accuracy-controlled views.</p>
+
+<h2>Hidden patterns</h2>
+<div class="grid">
+<div class="card"><h3>H1 · Overconfidence</h3><p>Temperature scaling cut ECE 0.319 → 0.086 with zero answer changes. Scale before gating.</p></div>
+<div class="card"><h3>H2 · Format flips</h3><p>Prose vs flat vs nested JSON flipped the yes/no gate. Pin one serialization per pipeline.</p></div>
+<div class="card"><h3>H3 · 77 labels collapse</h3><p>Fixed option budgets give ~2–3 tokens per label. Split choices or shortlist first.</p></div>
+<div class="card"><h3>H4 · Score is weakest</h3><p>Ordinal severity scoring trails choice/noul everywhere. Calibrate it separately.</p></div>
+<div class="card"><h3>H5 · Rankings reverse</h3><p>Stronger models look "better calibrated" by being right more. Control for accuracy.</p></div>
+<div class="card"><h3>H6 · Determinism gap</h3><p>Local: byte-identical repeats. Hosted: labels stable, probabilities jitter ±0.01–0.04.</p></div>
+</div>
+
+<h2>Who uses this</h2>
+<table>
+<tr><th>You are</th><th>You get</th></tr>
+<tr><td>Support / CS lead</td><td>A ticket router to test on your own tickets before paying for any API</td></tr>
+<tr><td>Agent builder</td><td>Local drop-in <code>/v1/systemone</code> server + the <code>noul</code>/<code>boolean</code> gotcha, documented</td></tr>
+<tr><td>ML engineer</td><td>4-axis protocol + ≤12-call shadow procedure for vendor comparison on your labels</td></tr>
+<tr><td>Researcher / student</td><td>Five reproduced patterns with code, figures, and a paper outline</td></tr>
+<tr><td>Compliance / security</td><td>Local-only path, gated review queues, documented adversarial behavior</td></tr>
+</table>
+
+<h2 id="quickstart">Quickstart</h2>
+<pre>git clone &lt;your-fork-url&gt; &amp;&amp; cd jev-systemone-open-benchmark-2026
+cp .env.example .env        # keys optional
+pip install -r requirements.txt
+python experiments/run_all.py --fast
+pytest tests -q
+# → ALL STEPS OK. See results/*.json</pre>
+<p>Docker: <code>docker compose up --build benchmark</code> (fast) or <code>--profile full up --build full</code>.</p>
+
+<h2>Live data, every run</h2>
+<p>ECB exchange rates, BTC/ETH moves, Berlin temperature, and front-page HackerNews titles — fetched live (11 states in the reference run) and routed through the System-One format. With API keys, a ≤12-call shadow compares hosted Jev/Clef on byte-identical inputs. Without keys: zero spend, zero fabricated numbers.</p>
+
+<h2>Full documentation</h2>
+<p>Everything above is the short version. The complete guide — protocol rationale, configuration table, repository map, limitations, and publish checklist — is in the <a href="https://github.com/">README</a> (start of repo page). Figures: <a href="dashboard.png">dashboard</a>, <a href="architecture.png">architecture</a>.</p>
+
+<footer>MIT licensed · Every figure and number on this page is generated by code in <code>experiments/</code> — re-run it and the page rebuilds itself.</footer>
+</div>
+</body>
+</html>
